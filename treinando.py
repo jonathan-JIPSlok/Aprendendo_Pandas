@@ -40,3 +40,17 @@ print()
 
 print(df.describe(percentiles = [0.25, 0.50, 0.75, 0.89]).T) #Mostra uma descricao das colunas com as porcentagens passadas aki
 print()
+
+print(df.memory_usage(deep=True)) #Mostra quanto de memoria cada coluna esta usando
+print()
+
+df_copy = df.copy(deep=True) #Cria uma copia do dataFrame para nao fazermos merda
+df_copy["Valor2"] = df_copy["Valor2"].astype(np.float16) #Converte o typo de dado
+print(df_copy.memory_usage(deep=True)) #da para ver que a memoria usada diminuiu
+print()
+
+print(df_copy.select_dtypes(include = ["float16", "float64"]).nunique()) #Seleciona por tipo de dados e o nunique() mostra a quantidade de dados unicos
+print()
+
+df_copy["Valor1"] = df_copy["Valor1"].astype("category") #Categori é um tipo de dado que serve para object
+print(df_copy.memory_usage(deep=True))
