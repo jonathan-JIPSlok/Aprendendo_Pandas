@@ -28,6 +28,7 @@ def Rs(x):
                 x1 += "."
         if num == "." and cont > 2:
             x1 += ","
+            x1 += "0"
         else:
             x1 += num
         cont += 1
@@ -36,4 +37,5 @@ def Rs(x):
 Vendas_Dinheiro = Vendas.apply(lambda x: x.replace("R$", "").replace(".", "").replace(",", ".")).astype(np.float16) - Vendas_Cartao.apply(lambda x: x.replace("R$", "").replace(".", "").replace(",", ".")).astype(np.float16)
 Vendas_Dinheiro = Vendas_Dinheiro.astype("object").apply(Rs).apply(lambda x: f"R${x}")
 
-print(pd.DataFrame({"Data":Data, "Vendas":Vendas, "Vendas no Cartão":Vendas_Cartao, "Vendas no Dinheiro": Vendas_Dinheiro}))
+df = pd.DataFrame({"Data":Data, "Vendas":Vendas, "Vendas no Cartão":Vendas_Cartao, "Vendas no Dinheiro": Vendas_Dinheiro})
+#df.to_excel("Vendas.xlsx", index = False)
